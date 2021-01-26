@@ -1,19 +1,19 @@
 package com.pt.controllers;
 
 
+import com.pt.components.WindowInitializer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class MainController {
+public class MainController implements Controller {
 
     @FXML
     public TextField bottomTextField;
@@ -29,17 +29,33 @@ public class MainController {
     public Button addListButton;
 
     public void initialize() {
-        bottomTextField.setText("Hello World!");
 
-        listComboBox.getItems().add(new Label("Item 3"));
-        listComboBox.getItems().add(new Label("Item 4"));
-
-
-        mainListView.getItems().add(new Label("Item 1"));
-        mainListView.getItems().add(new Label("Item 2"));
     }
 
     public void newListButtonClicked(MouseEvent mouseEvent) throws IOException {
+//        openNewTaskListWindow();
+        WindowInitializer initializer = new WindowInitializer("/new_task_list_window.fxml");
+        NewTaskListWindowController controller = (NewTaskListWindowController)initializer.getController();
+        controller.setSomething("Thing");
+        Stage stage = new Stage();
+        stage.setScene(initializer.getScene());
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
+
+    }
+
+    private void openNewTaskListWindow() throws IOException {
+        Stage stage = new Stage();
+        Parent newTaskListWindow = FXMLLoader.load(getClass().getResource("/new_task_list_window.fxml"));
+        Scene scene = new Scene(newTaskListWindow);
+        stage.setScene(scene);
+
+        stage.setTitle("New List");
+
+        stage.show();
+    }
+
+    private void openNewTaskWindow() throws IOException {
         Stage stage = new Stage();
         Parent newListWindow = FXMLLoader.load(getClass().getResource("/new_task_window.fxml"));
         Scene scene = new Scene(newListWindow);

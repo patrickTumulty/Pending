@@ -1,5 +1,7 @@
 package com.pt.app;
 
+import com.pt.components.WindowInitializer;
+import com.pt.controllers.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,12 +18,14 @@ public class PendingApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/mainscreen.fxml"));
+        WindowInitializer mainWindow = new WindowInitializer("/mainscreen.fxml");
+        MainController mainController = (MainController)mainWindow.getController();
 
-        Scene scene = new Scene(root, 1000, 800);
+        PendingAppDataBackend backend = new PendingAppDataBackend(mainController);
+
         primaryStage.setResizable(false);
         primaryStage.setTitle(".pending");
-        primaryStage.setScene(scene);
+        primaryStage.setScene(mainWindow.getScene());
         primaryStage.show();
 
 
