@@ -10,56 +10,74 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="400.0" spacing="10.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pt.controllers.NewTaskWindowController">
    <children>
-      <Label prefHeight="31.0" prefWidth="78.0" text="Todays Date">
-         <VBox.margin>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
-         </VBox.margin></Label>
-      <TextField alignment="CENTER" promptText="Title">
-         <VBox.margin>
-            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-         </VBox.margin>
-      </TextField>
-      <TextArea prefHeight="200.0" prefWidth="200.0" promptText="Description">
-         <VBox.margin>
-            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-         </VBox.margin>
+      <TextArea fx:id="newTaskTextArea" prefHeight="400.0" prefWidth="400.0">
+         <HBox.margin>
+            <Insets bottom="10.0" left="10.0" right="5.0" top="10.0" />
+         </HBox.margin>
+         <font>
+            <Font size="16.0" />
+         </font>
       </TextArea>
-      <DatePicker prefHeight="27.0" prefWidth="191.0" promptText="Completed By" />
-      <HBox alignment="CENTER" prefHeight="30.0" prefWidth="400.0">
+      <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="200.0">
          <children>
-            <Label text="Time">
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
+            <Label text="Completion Date">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
             </Label>
-            <CheckBox alignment="CENTER" mnemonicParsing="false" prefHeight="28.0" prefWidth="11.0">
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
+            <DatePicker fx:id="newTaskDatePicker" onAction="#datePickerOnAction">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </DatePicker>
+            <Line endX="100.0" startX="-80.0" stroke="#9e9e9e">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </Line>
+            <CheckBox fx:id="specifyTimeToggle" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#specifyTimeToggleButton" text="Specify Time">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
             </CheckBox>
-            <TextField prefHeight="27.0" prefWidth="54.0" promptText="12:00">
-               <HBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </HBox.margin>
+            <TextField fx:id="timeTextField" alignment="CENTER" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="100.0" promptText="12:00">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
             </TextField>
-            <RadioButton mnemonicParsing="false" text="AM">
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-            </RadioButton>
-            <RadioButton mnemonicParsing="false" text="PM">
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-            </RadioButton>
+            <HBox alignment="CENTER" prefHeight="38.0" prefWidth="200.0">
+               <children>
+                  <RadioButton fx:id="radioAM" disable="true" mnemonicParsing="false" text="AM">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="5.0" top="10.0" />
+                     </HBox.margin>
+                  </RadioButton>
+                  <RadioButton fx:id="radioPM" disable="true" mnemonicParsing="false" text="PM">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="5.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </RadioButton>
+               </children>
+            </HBox>
+            <Line endX="100.0" startX="-80.0" stroke="#9e9e9e">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </Line>
+            <Button fx:id="newTaskCreateButton" disable="true" mnemonicParsing="false" onMouseClicked="#createButtonClicked" prefHeight="27.0" prefWidth="94.0" text="Create">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </Button>
          </children>
-      </HBox>
-      <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Create">
-         <VBox.margin>
-            <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
-         </VBox.margin></Button>
+         <HBox.margin>
+            <Insets bottom="10.0" left="5.0" right="10.0" top="10.0" />
+         </HBox.margin>
+      </VBox>
    </children>
-</VBox>
+</HBox>

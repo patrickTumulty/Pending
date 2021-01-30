@@ -1,8 +1,10 @@
 package com.pt.tasks;
 
+import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class PendingTask extends SimpleNote implements Task {
+public class PendingTask extends SimpleNote implements Task, Comparable<PendingTask> {
     private LocalDateTime dueDate;
     private final LocalDateTime dateCreated;
     private boolean completionStatus;
@@ -44,5 +46,26 @@ public class PendingTask extends SimpleNote implements Task {
     @Override
     public boolean isComplete() {
         return completionStatus;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder(title);
+        sb.append(description);
+        sb.append("\n\n");
+        sb.append("DueDate : ");
+        sb.append(dueDate);
+        return sb.toString();
+    }
+
+    @Override
+    public int compareTo(PendingTask otherTask) {
+        Duration thisDuration = Duration.between(this.dueDate, LocalDate.now());
+        Duration otherDuration = Duration.between(otherTask.dueDate, LocalDate.now());
+        return thisDuration.compareTo(otherDuration);
+    }
+
+    public long getDaysTillDue() {
+        return Duration.between(dueDate, LocalDate.now()).toDays();
     }
 }

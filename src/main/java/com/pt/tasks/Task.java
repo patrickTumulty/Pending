@@ -1,5 +1,6 @@
 package com.pt.tasks;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public interface Task extends Note {
@@ -8,6 +9,5 @@ public interface Task extends Note {
     public LocalDateTime getDateCreated();
     public void setCompletionStatus(boolean status);
     public boolean isComplete();
-
 
 }

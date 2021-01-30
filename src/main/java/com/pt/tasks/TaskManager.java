@@ -6,11 +6,25 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TaskManager extends HashMap<String, ArrayList<PendingTask>> implements Map<String, ArrayList<PendingTask>> {
+public class TaskManager extends HashMap<String, PendingTaskList> implements Map<String, PendingTaskList> {
 
-    public TaskManager() {
+    private static TaskManager uniqueInstance;
+
+    private TaskManager() {
 
     }
+
+    public static TaskManager getInstance() {
+        if (uniqueInstance == null) {
+            synchronized (TaskManager.class) {
+                if (uniqueInstance == null) {
+                    uniqueInstance = new TaskManager();
+                }
+            }
+        }
+        return uniqueInstance;
+    }
+
 
     public boolean hasTasks() {
         return !this.isEmpty();
@@ -18,21 +32,21 @@ public class TaskManager extends HashMap<String, ArrayList<PendingTask>> impleme
 
     public void addNewTaskList(String listName) {
         if (this.containsKey(listName)) return;
-        this.put(listName, new ArrayList<PendingTask>());
+        this.put(listName, new PendingTaskList());
     }
 
-    public void addNewTaskList(String listName, ArrayList<PendingTask> tasks) {
+    public void addNewTaskList(String listName, PendingTaskList tasks) {
         if (this.containsKey(listName)) return;
         this.put(listName, tasks);
     }
 
     public void addTaskToList(String listName, PendingTask task) {
-        ArrayList<PendingTask> thisArray = this.get(listName);
+        PendingTaskList thisArray = this.get(listName);
         thisArray.add(task);
         this.put(listName, thisArray);
     }
 
-    public ArrayList<PendingTask> getTaskList(String key) {
+    public PendingTaskList getTaskList(String key) {
         return this.get(key);
     }
 
